@@ -20,21 +20,17 @@ let playerChoice = function() {
     }
 }
 
-// If statement to determine the winner, computer or human depending on choices.
+// If statement to determine the winner, computer or human depending on choices. Returns 1 if human wins, returns 2 if computer wins.
 let determineWinner = function(player_choice, computer_choice) {
     if ((player_choice == "rock" && computer_choice == "scissor") ||
         (player_choice == "scissor" && computer_choice == "paper") ||
         (player_choice == "paper" && computer_choice == "rock")) {
-            console.log("Human wins!");
-            playerScore++
-            return;
+            return 1;
         }
     else if ((computer_choice == "rock" && player_choice == "scissor") ||
     (computer_choice == "scissor" && player_choice == "paper") ||
     (computer_choice == "paper" && player_choice == "rock")) {
-        console.log("Computer wins!");
-        computerScore++
-        return
+        return 2;
     } else {
         console.log("Its a draw");
     }};
@@ -45,15 +41,41 @@ let playRound = function() {
     console.log(computerSelection);
     const humanSelection = playerChoice()
     console.log(humanSelection);
-    determineWinner(humanSelection, computerSelection);
-    console.log(`Human score ${playerScore}, computer score ${computerScore}`)
+    return determineWinner(humanSelection, computerSelection);
 }
 
-// Set scores to 0
-let playerScore = 0;
-let computerScore = 0;
 
-playRound()
+let playGame = function() {
+
+    // Set scores to 0
+    let playerScore = 0;
+    let computerScore = 0;
+
+    let round = 0;
+    while (round < 6){
+
+        /* Play a round */
+        let roundWinner = playRound()
+
+        // If human wins, increment the score
+        if (roundWinner === 1) {
+            console.log("Human wins!");
+            playerScore++
+        }
+
+        // If computer wins, increment the score
+        else if (roundWinner === 2) {
+            console.log("Computer wins!");
+            computerScore++
+        }
+
+        // Log current scores
+        console.log(`Human score ${playerScore} computerScore ${computerScore}`)
+        round++
+    }
+}
+
+playGame();
 
 /* Pseudocode 
 
