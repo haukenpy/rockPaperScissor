@@ -53,7 +53,7 @@ let playGame = function() {
     let computerScore = 0;
 
     let round = 0;
-    while (round < 6){
+    while (round < 5){
 
         let roundWinner = playRound()
 
