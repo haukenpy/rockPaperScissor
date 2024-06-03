@@ -35,7 +35,7 @@ let determineWinner = function(player_choice, computer_choice) {
         console.log("Its a draw");
     }};
 
-// Main function. Receive the human input and computer input. Run the determine winner function and update the scores.
+// Receive the human input and computer input. Run the determine winner function and update the scores. Returns 1 if human wins, returns 2 if computer wins.
 let playRound = function() {
     const computerSelection = computerChoice()
     console.log(computerSelection);
@@ -44,7 +44,7 @@ let playRound = function() {
     return determineWinner(humanSelection, computerSelection);
 }
 
-
+// Main function. Contains while loop to run playRound 5 times. Updates the user scores and logs the round winner and current scores.
 let playGame = function() {
 
     // Set scores to 0
@@ -70,9 +70,15 @@ let playGame = function() {
         }
 
         // Log current scores
+        console.log("Current scores: ");
         console.log(`Human score ${playerScore} computerScore ${computerScore}`)
         round++
     }
+
+    let winner = (playerScore > computerScore) ? "Human won the game!" :
+                 (computerScore > playerScore) ? "Computer won the game!" :
+                 "Game ended in a draw!";
+    console.log(winner);
 }
 
 playGame();
