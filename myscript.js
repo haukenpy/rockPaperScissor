@@ -1,42 +1,61 @@
-/* Computer selects an option from rock, paper or scissor */
-
+// Computer selects an option from rock, paper or scissor
 let computerChoice = function() {
     random_number = Math.floor(Math.random() * 3);
     let choices = ["rock", "paper", "scissor"]
     return selection = choices[random_number]    
 }
 
-/* Store the computer selection in a variable. */
-let computer_selection = computerChoice();
-console.log(computer_selection);
-
-/* Retrieve input from the player */
+// Retrieve input from the player
 let playerChoice = function() {
     let player_choice = prompt("Select your option: ", "");
 
     /* Cas the player selection to lowercase and ensure it is a valid option */
     player_choice = player_choice.toLowerCase();
     if (player_choice == "rock" || player_choice == "paper" || player_choice == "scissor") {
-        console.log(player_choice);
         return player_choice;
     } else {
+        /* If players choice is not valid, prompt error message and ask for new input */
         alert("Player choice is not valid");
         playerChoice()
     }
 }
-playerChoice()
+
+// If statement to determine the winner, computer or human depending on choices.
+let determineWinner = function(player_choice, computer_choice) {
+    if ((player_choice == "rock" && computer_choice == "scissor") ||
+        (player_choice == "scissor" && computer_choice == "paper") ||
+        (player_choice == "paper" && computer_choice == "rock")) {
+            console.log("Human wins!");
+            playerScore++
+            return;
+        }
+    else if ((computer_choice == "rock" && player_choice == "scissor") ||
+    (computer_choice == "scissor" && player_choice == "paper") ||
+    (computer_choice == "paper" && player_choice == "rock")) {
+        console.log("Computer wins!");
+        computerScore++
+        return
+    } else {
+        console.log("Its a draw");
+    }};
+
+// Main function. Receive the human input and computer input. Run the determine winner function and update the scores.
+let playRound = function() {
+    const computerSelection = computerChoice()
+    console.log(computerSelection);
+    const humanSelection = playerChoice()
+    console.log(humanSelection);
+    determineWinner(humanSelection, computerSelection);
+    console.log(`Human score ${playerScore}, computer score ${computerScore}`)
+}
+
+// Set scores to 0
+let playerScore = 0;
+let computerScore = 0;
+
+playRound()
 
 /* Pseudocode 
-
-Write a function that randomly chooses "rock", "paper" or "scissor".
-1. Option for a random selection. (math library?)
-2. Array containing the three options.
-3. Store the selection in  a variable
-
-Write the logic to get the human choice
-1. Prompt the user for an input
-2. Input should be case sensitive.
-3. Input should be stored in a variable.
 
 Use variables to keep track of scores'
 1. Define the logic to determine the winner:
