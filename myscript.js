@@ -53,7 +53,7 @@ let playGame = function() {
     let computerScore = 0;
 
     let round = 0;
-    while (round < 5){
+    // while (round < 5){
 
         let roundWinner = playRound()
 
@@ -70,12 +70,12 @@ let playGame = function() {
         console.log("Current scores: ");
         console.log(`Human score ${playerScore} computerScore ${computerScore}`)
         round++
-    }
+    //}
 
     let winner = (playerScore > computerScore) ? "Human won the game!" :
                  (computerScore > playerScore) ? "Computer won the game!" :
                  "Game ended in a draw!";
     console.log(winner);
-}
+    }
 
 playGame();
