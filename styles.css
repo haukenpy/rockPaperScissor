@@ -1,0 +1,31 @@
+button {
+    background-color: #33bbff;
+    color: black;
+    font-weight: bold;
+    font-size: 16px;
+    padding: 5px;
+    width: 180px;
+    height: 40px;
+    border-radius: 5px;
+
+}
+
+
+.container {
+    background-color: #c6e2ff;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.button-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    height: 200px;
+    width: 800px;
+}
+
+
