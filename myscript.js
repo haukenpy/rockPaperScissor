@@ -4,13 +4,23 @@ let computerChoice = function() {
     return selection = choices[random_number]    
 }
 
-let playerChoice = function() {
+let createPara = function(string) {
+    let parentDiv = document.querySelector(".display-div");
+    let para = document.createElement("p");
+    para.textContent = string;
+    parentDiv.appendChild(para);
+}
 
     const buttons = document.querySelectorAll("button");
-    buttons.forEach.call(buttons, addEventListener("click", (e) => console.log(e.target.id)));
-
-
-
+    buttons.forEach.call(buttons, addEventListener("click", function(e) {
+        this.event.stopPropagation();
+        let player_choice = e.target.id;
+        createPara(`You selected ${player_choice}`);
+             
+        let computer_choice = computerChoice();
+        createPara(`Computer counters with ${computer_choice}`);
+        
+        }));
     /* let player_choice = prompt("Select your option: ", "");
 
     // Cast the player selection to lowercase and ensure it is a valid option
@@ -21,7 +31,6 @@ let playerChoice = function() {
         alert("Player choice is not valid");
         playerChoice()
     } */
-}
 
 // Returns 1 if human wins, returns 2 if computer wins.
 let determineWinner = function(player_choice, computer_choice) {

@@ -7,16 +7,25 @@ button {
     width: 180px;
     height: 40px;
     border-radius: 5px;
-
 }
-
 
 .container {
     background-color: #c6e2ff;
     height: 100vh;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
+}
+
+.display-div {
+    font-size: 24px;
+    font-weight: bold;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 800px;
 }
 
 .button-container {
