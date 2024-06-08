@@ -1,3 +1,8 @@
+p {
+    padding: 0;
+    margin: 0;
+}
+
 button {
     background-color: #33bbff;
     color: black;
@@ -9,32 +14,42 @@ button {
     border-radius: 5px;
 }
 
+.score-div {
+    padding-top: 50px;
+    font-size: 24px;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    background-color: #c6e2ff;
+}
+
 .container {
     background-color: #c6e2ff;
-    height: 100vh;
+    height: 80vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+}
+
+.container div {
+    font-size: 24px;
+    gap: 30px;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 800px;
 }
 
 .display-div {
-    font-size: 24px;
-    font-weight: bold;
-    display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    width: 800px;
+    height: 200px;
 }
 
 .button-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
     gap: 20px;
     height: 200px;
-    width: 800px;
 }
 
 

@@ -5,7 +5,6 @@ let computerChoice = function() {
 }
 
 let createPara = function(string) {
-    let parentDiv = document.querySelector(".display-div");
     let para = document.createElement("p");
     para.textContent = string;
     parentDiv.appendChild(para);
@@ -17,32 +16,33 @@ let determineWinner = function(player_choice, computer_choice) {
         (player_choice == "scissor" && computer_choice == "paper") ||
         (player_choice == "paper" && computer_choice == "rock")) {
             createPara(`${player_choice} beats ${computer_choice}, you win!`)
+            return 1;
         }
     else if ((computer_choice == "rock" && player_choice == "scissor") ||
         (computer_choice == "scissor" && player_choice == "paper") ||
         (computer_choice == "paper" && player_choice == "rock")) {
-            createPara(`${computer_choice} beats ${player_choice}, you win!`)
+            createPara(`${computer_choice} beats ${player_choice}, the computer win!`)
+            return 2;
     }
     else {
         createPara("Its a draw");
     }};
 
-// Returns 1 if human wins, returns 2 if computer wins.
-let playRound = function() {
+let resetGame = function() {
 
-    const computerSelection = computerChoice()
-    console.log(computerSelection);
+    parentDiv.textContent = "";
 
-    const humanSelection = playerChoice()
-    console.log(humanSelection);
-
-    return determineWinner(humanSelection, computerSelection);
+    PLAYERSCORE = 0;
+    COMPUTERSCORE = 0;
+    
+    computerScoreTag.textContent = `Computer Score 0`;
+    playerScoreTag.textContent = `Computer Score 0`;
 }
 
-
 let playGame = function(e) {
+    e.stopPropagation();
 
-    this.event.stopPropagation();
+    parentDiv.textContent = "";
 
     let player_choice = e.target.id;
     createPara(`You selected ${player_choice}`);
@@ -50,35 +50,28 @@ let playGame = function(e) {
     let computer_choice = computerChoice();
     createPara(`Computer counters with ${computer_choice}`);
 
-    let playerScore = 0;
-    let computerScore = 0;
-
-    let round = 0;
-    /* while (round < 5){
-
-        let roundWinner = playRound()
-
-        if (roundWinner === 1) {
-            console.log("Human wins!");
-            playerScore++
-        }
-
-        else if (roundWinner === 2) {
-            console.log("Computer wins!");
-            computerScore++
-        }
-
-        console.log("Current scores: ");
-        console.log(`Human score ${playerScore} computerScore ${computerScore}`)
-        round++
-    //}
-
-    let winner = (playerScore > computerScore) ? "Human won the game!" :
-                 (computerScore > playerScore) ? "Computer won the game!" :
-                 "Game ended in a draw!";
-    console.log(winner); */
+    let roundWinner = determineWinner(player_choice, computer_choice);
+    if (roundWinner === 1) {
+        PLAYERSCORE++;
+        playerScoreTag.textContent = `Player Score ${PLAYERSCORE}`;
+    } else if (roundWinner === 2) {
+        COMPUTERSCORE++;
+        computerScoreTag.textContent = `Computer Score ${COMPUTERSCORE}`;
     }
 
+    if (PLAYERSCORE > 4 || COMPUTERSCORE > 4) {
+        let gameWinner = (PLAYERSCORE > COMPUTERSCORE) ? "Player" : "Computer";
+        resetGame()
+        createPara(`Game ended winner is ${gameWinner}`);
+    }
+}
+
+let PLAYERSCORE = 0;
+let COMPUTERSCORE = 0;
+let playerScoreTag = document.querySelector("#playerScore");
+let computerScoreTag = document.querySelector("#computerScore");
+let parentDiv = document.querySelector(".display-div");
 
 const buttons = document.querySelectorAll("button");
-buttons.forEach.call(buttons, addEventListener("click", function(e) { playGame(e); }));
+buttons.forEach(button => button.addEventListener("click", playGame));
+
