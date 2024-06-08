@@ -5,7 +5,13 @@ let computerChoice = function() {
 }
 
 let playerChoice = function() {
-    let player_choice = prompt("Select your option: ", "");
+
+    const buttons = document.querySelectorAll("button");
+    buttons.forEach.call(buttons, addEventListener("click", (e) => console.log(e.target.id)));
+
+
+
+    /* let player_choice = prompt("Select your option: ", "");
 
     // Cast the player selection to lowercase and ensure it is a valid option
     player_choice = player_choice.toLowerCase();
@@ -14,7 +20,7 @@ let playerChoice = function() {
     } else {
         alert("Player choice is not valid");
         playerChoice()
-    }
+    } */
 }
 
 // Returns 1 if human wins, returns 2 if computer wins.
