@@ -9,44 +9,22 @@ let createPara = function(string) {
     let para = document.createElement("p");
     para.textContent = string;
     parentDiv.appendChild(para);
-}
+}      
 
-    const buttons = document.querySelectorAll("button");
-    buttons.forEach.call(buttons, addEventListener("click", function(e) {
-        this.event.stopPropagation();
-        let player_choice = e.target.id;
-        createPara(`You selected ${player_choice}`);
-             
-        let computer_choice = computerChoice();
-        createPara(`Computer counters with ${computer_choice}`);
-        
-        }));
-    /* let player_choice = prompt("Select your option: ", "");
-
-    // Cast the player selection to lowercase and ensure it is a valid option
-    player_choice = player_choice.toLowerCase();
-    if (player_choice == "rock" || player_choice == "paper" || player_choice == "scissor") {
-        return player_choice;
-    } else {
-        alert("Player choice is not valid");
-        playerChoice()
-    } */
-
-// Returns 1 if human wins, returns 2 if computer wins.
 let determineWinner = function(player_choice, computer_choice) {
 
     if ((player_choice == "rock" && computer_choice == "scissor") ||
         (player_choice == "scissor" && computer_choice == "paper") ||
         (player_choice == "paper" && computer_choice == "rock")) {
-            return 1;
+            createPara(`${player_choice} beats ${computer_choice}, you win!`)
         }
-    
     else if ((computer_choice == "rock" && player_choice == "scissor") ||
-    (computer_choice == "scissor" && player_choice == "paper") ||
-    (computer_choice == "paper" && player_choice == "rock")) {
-        return 2;
-    } else {
-        console.log("Its a draw");
+        (computer_choice == "scissor" && player_choice == "paper") ||
+        (computer_choice == "paper" && player_choice == "rock")) {
+            createPara(`${computer_choice} beats ${player_choice}, you win!`)
+    }
+    else {
+        createPara("Its a draw");
     }};
 
 // Returns 1 if human wins, returns 2 if computer wins.
@@ -62,13 +40,21 @@ let playRound = function() {
 }
 
 
-let playGame = function() {
+let playGame = function(e) {
+
+    this.event.stopPropagation();
+
+    let player_choice = e.target.id;
+    createPara(`You selected ${player_choice}`);
+             
+    let computer_choice = computerChoice();
+    createPara(`Computer counters with ${computer_choice}`);
 
     let playerScore = 0;
     let computerScore = 0;
 
     let round = 0;
-    // while (round < 5){
+    /* while (round < 5){
 
         let roundWinner = playRound()
 
@@ -90,7 +76,9 @@ let playGame = function() {
     let winner = (playerScore > computerScore) ? "Human won the game!" :
                  (computerScore > playerScore) ? "Computer won the game!" :
                  "Game ended in a draw!";
-    console.log(winner);
+    console.log(winner); */
     }
 
-playGame();
+
+const buttons = document.querySelectorAll("button");
+buttons.forEach.call(buttons, addEventListener("click", function(e) { playGame(e); }));
